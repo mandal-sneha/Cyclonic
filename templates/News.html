@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster News</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='News.css') }}">
+</head>
+<body>
+    <div class="news-section">
+        <h1>Latest Natural Disaster News</h1>
+        <div id="news-container" class="news-container">
+            <!-- News articles will be loaded here dynamically -->
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='News.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Cyclones</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='HistoricalCyclonesStyles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body style="background-color: #212121; color: #ffffff;">
+    <header class="hc-header">
+        <h1 class="hc-title"><i class="fas fa-water"></i> Historical Cyclones</h1>
+    </header>
+
+    <section class="hc-intro-section">
+        <p class="hc-intro-text">Explore the paths of cyclones that have impacted India between 2020 and 2023.</p>
+    </section>
+
+    <section class="hc-dropdown-section">
+        <label class="hc-dropdown-label" for="hc-year-dropdown">Select a Year:</label>
+        <select id="hc-year-dropdown" class="hc-dropdown" onchange="displayCycloneMap()">
+            <option value="" disabled selected>Select Year</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+        </select>
+    </section>
+
+    <section class="hc-map-section">
+        <h2 class="hc-map-title">Cyclone Paths for Selected Year</h2>
+        <p class="hc-map-description">Click on a year to view the paths of cyclones for that year.</p>
+        <div class="hc-map-container">
+            <img id="hc-cyclone-map" src="" alt="Cyclone Map" class="hc-cyclone-map-image" style="display: none;">
+        </div>
+    </section>
+
+    <section class="hc-cyclones-list">
+        <div id="cyclone-2020" class="hc-cyclone-item" style="display: none;">
+            <div class="hc-cyclone-name" onclick="toggleDescription('desc-amphan')">
+                Super Cyclonic Storm AMPHAN (May 2020) <span class="dropdown-icon">▼</span>
+            </div>
+            <div id="desc-amphan" class="hc-cyclone-description" style="display: none;">
+                <p>Cyclone Amphan originated in the Bay of Bengal and rapidly intensified into a super cyclonic storm. Making landfall near the India-Bangladesh border, it brought devastation with winds over 200 km/h. Amphan caused widespread destruction in West Bengal and Odisha, leading to loss of lives, displacement, and severe economic impact. Coastal towns faced flooding, structural damage, and significant power outages.</p>
+            </div>
+
+            <div class="hc-cyclone-name" onclick="toggleDescription('desc-nisarga')">
+                Severe Cyclonic Storm NISARGA (June 2020) <span class="dropdown-icon">▼</span>
+            </div>
+            <div id="desc-nisarga" class="hc-cyclone-description" style="display: none;">
+                <p>Originating in the Arabian Sea, Cyclone Nisarga made a rare west coast landfall in Maharashtra, India. With sustained winds nearing 120 km/h, Nisarga led to significant structural damage and power outages in Mumbai and surrounding areas. This cyclone highlighted the vulnerability of the densely populated western coast to tropical storms.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="hc-footer">
+        <p>Data sourced from historical records.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='HistoricalCyclonesScript.js') }}"></script>
+</body>
+</html>

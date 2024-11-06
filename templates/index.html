@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclonic</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='indexstyles.css') }}">
+</head>
+<body>
+    
+<div class="ind-overlay">
+    <h1 id="ind-typewriter"></h1>
+</div>
+
+<div class="ind-container">
+    <a href="{{ url_for('path_predictor') }}"><button class="ind-button">Cyclone Path Predictor</button></a>
+    <a href="{{ url_for('ml_model') }}"><button class="ind-button">Intensity Predictor</button></a>
+    <a href="{{ url_for('historical_cyclones') }}"><button class="ind-button">Historical Cyclones</button></a>
+    <a href="{{ url_for('news') }}"><button class="ind-button">News</button></a>
+</div>
+
+<script src="{{ url_for('static', filename='indexscript.js') }}"></script>
+</body>
+</html>

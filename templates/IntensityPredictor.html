@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclone Intensity Predictor</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='IntensityPredictorStyles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="ip-container">
+        <h1 class="ip-title"><i class="fas fa-cloud-showers-heavy"></i> Cyclone Intensity Predictor</h1>
+        
+        <form id="ip-upload-form" enctype="multipart/form-data">
+            <label for="file" class="ip-file-label"><i class="fas fa-upload"></i> Choose a cyclone satellite image:</label>
+            <input type="file" id="file" name="file" accept="image/*" required>
+            <button type="submit" class="ip-analyze-btn"><i class="fas fa-search"></i> Analyze Image</button>
+        </form>
+        
+        <div id="ip-loading" class="ip-hidden">
+            <div class="ip-spinner"></div>
+            <p id="ip-loading-text" class="ip-typing">Analyzing...</p>
+        </div>
+        
+        <div id="ip-results" class="ip-hidden">
+            <div class="ip-image-container">
+                <img id="ip-uploaded-image" alt="Uploaded Cyclone Image">
+            </div>
+            <div class="ip-data-container">
+                <h2 class="ip-results-title"><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                <table id="ip-results-table">
+                    <thead>
+                        <tr><th>Attribute</th><th>Value</th></tr>
+                    </thead>
+                    <tbody id="ip-results-body">
+                        <!-- JavaScript will populate this table -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='IntensityPredictorScript.js') }}"></script>
+</body>
+</html>

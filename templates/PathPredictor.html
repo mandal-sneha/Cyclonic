@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclone Path Predictor</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='PathPredictorStyles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body style="background-color: #212121; color: #ffffff;">
+    <div class="pp-container">
+        <div class="pp-form-container">
+            <h1 class="pp-title"><i class="fas fa-umbrella"></i> Cyclone Path Predictor</h1>
+            <form id="pp-predictor-form" class="pp-form">
+                <div class="pp-form-group">
+                    <label class="pp-label" for="latitude">Latitude:</label>
+                    <input class="pp-input" id="latitude" name="latitude" step="0.1" required>
+                </div>
+                
+                <div class="pp-form-group">
+                    <label class="pp-label" for="longitude">Longitude:</label>
+                    <input class="pp-input" id="longitude" name="longitude" step="0.1" required>
+                </div>
+                
+                <div class="pp-form-group">
+                    <label class="pp-label" for="speed">Speed (km/h):</label>
+                    <input class="pp-input" id="speed" name="speed" required>
+                </div>
+                
+                <div class="pp-form-group">
+                    <label class="pp-label" for="direction">Direction (degrees):</label>
+                    <input class="pp-input" id="direction" name="direction" min="0" max="360" required>
+                </div>
+                
+                <button class="pp-submit-btn" type="submit"><i class="fas fa-map"></i> Generate Map</button>
+            </form>
+        </div>
+
+        <div class="pp-map-section">
+            <div id="pp-loading-indicator" class="pp-loading-container pp-hidden">
+                <div class="pp-spinner"></div>
+                <p class="pp-loading-text">Generating map...</p>
+            </div>
+            
+            <div class="pp-image-container">
+                <img id="pp-cyclone-map" class="pp-map-image" src="" alt="Cyclone Path Map" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='PathPredictorScript.js') }}"></script>
+</body>
+</html>
