@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData();
         formData.append('file', file);
 
-        // Show loading indicator and hide previous results
         loadingIndicator.classList.remove('ip-hidden');
         resultsContainer.classList.add('ip-hidden');
 
@@ -40,35 +39,60 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error("Server returned an error:", result.error);
                 alert(result.error);
             } else {
-                // Displaying the uploaded image URL
                 uploadedImage.src = result.image_url;
                 uploadedImage.alt = "Uploaded Cyclone Image";
-                console.log("Uploaded image URL set to:", result.image_url);
 
-                // Clear previous results and populate with new data
                 resultsTableBody.innerHTML = '';
-                for (const [attribute, value] of Object.entries(result.analysis)) {
-                    console.log(`Adding row: ${attribute} - ${value}`);
+                const analysis = result.analysis;
+                for (const [attribute, value] of Object.entries(analysis)) {
                     const row = document.createElement('tr');
                     const cellAttr = document.createElement('td');
                     const cellValue = document.createElement('td');
                     cellAttr.textContent = attribute;
-                    cellValue.textContent = value;
+
+                    let formattedValue = value;
+                    let unit = '';
+
+                    switch (attribute) {
+                        case 'Central Pressure':
+                            formattedValue = value.toFixed(0);
+                            unit = 'hPa';
+                            break;
+                        case 'Cyclone Intensity':
+                            formattedValue = value.toFixed(1);
+                            unit = 'Intensity';
+                            break;
+                        case 'Eye Diameter':
+                            formattedValue = value.toFixed(1);
+                            unit = 'km';
+                            break;
+                        case 'Rainfall Intensity':
+                            formattedValue = value.toFixed(1);
+                            unit = 'mm/h';
+                            break;
+                        case 'Sea Surface Temperature':
+                            formattedValue = value.toFixed(1);
+                            unit = '°C';
+                            break;
+                        case 'Size (Diameter)':
+                            formattedValue = value.toFixed(1);
+                            unit = 'km';
+                            break;
+                    }
+
+                    cellValue.textContent = `${formattedValue} ${unit}`;
                     row.appendChild(cellAttr);
                     row.appendChild(cellValue);
                     resultsTableBody.appendChild(row);
                 }
 
-                // Show results container
                 resultsContainer.classList.remove('ip-hidden');
             }
         } catch (error) {
             console.error("Error occurred while processing the image:", error);
             alert("An error occurred while processing the image. Please try again.");
         } finally {
-            // Hide loading indicator
             loadingIndicator.classList.add('ip-hidden');
-            console.log("Loading indicator hidden.");
         }
     });
 });

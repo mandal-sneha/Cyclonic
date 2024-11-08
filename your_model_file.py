@@ -1,4 +1,3 @@
-# your_model_file.py
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -16,7 +15,7 @@ class CycloneCNN(nn.Module):
         self.flattened_size = self._get_flattened_size()
         self.fc1 = nn.Linear(self.flattened_size, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 7)  # Output size of 7 attributes, excluding Storm Surge
+        self.fc3 = nn.Linear(256, 7) 
 
     def _get_flattened_size(self):
         with torch.no_grad():
@@ -38,14 +37,12 @@ class CycloneCNN(nn.Module):
         x = self.fc3(x)
         return x
 
-# Load the trained model
 def load_model():
     model = CycloneCNN()
     model.load_state_dict(torch.load("trained_model.pth", map_location=torch.device('cpu')))
-    model.eval()  # Set model to evaluation mode
+    model.eval()
     return model
 
-# Preprocess the input image
 def preprocess_image(image_path):
     transform = transforms.Compose([
         transforms.Resize((250, 250)),
@@ -53,9 +50,8 @@ def preprocess_image(image_path):
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
     image = Image.open(image_path).convert("RGB")
-    return transform(image).unsqueeze(0)  # Add batch dimension
+    return transform(image).unsqueeze(0) 
 
-# Make prediction
 def predict_cyclone_attributes(image_path):
     model = load_model()
     input_tensor = preprocess_image(image_path)

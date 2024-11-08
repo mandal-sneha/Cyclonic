@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const apiKey = "c35a5406889545269bc836d90ec9c376";
     const newsContainer = document.getElementById("news-container");
 
-    // Keywords for disaster filtering
     const disasterKeywords = ["flood", "earthquake", "hurricane", "cyclone", "tsunami", "wildfire", "landslide", "eruption"];
     
     async function fetchDisasterNews() {
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayNews(articles) {
-        newsContainer.innerHTML = "";  // Clear any previous content
+        newsContainer.innerHTML = ""; 
 
         if (articles.length === 0) {
             newsContainer.innerHTML = "<p>No relevant disaster news found.</p>";

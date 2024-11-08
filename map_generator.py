@@ -1,5 +1,5 @@
 import os
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'  # Set at the very beginning
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 import matplotlib
 matplotlib.use('Agg')
@@ -12,21 +12,20 @@ logger = logging.getLogger(__name__)
 
 def generate_map(latitude, longitude, wind_speed, direction):
     try:
-        dt = 6
-        f = 0.00012
-        wind_speed_m = wind_speed * 0.514
-        u = wind_speed_m * np.cos(np.radians(direction))
-        v = wind_speed_m * np.sin(np.radians(direction))
+        dt = 1  
+        f = 0.00012  
+        wind_speed_m = wind_speed * 0.514  
+        u = wind_speed_m * np.cos(np.radians(direction))  
+        v = wind_speed_m * np.sin(np.radians(direction))  
 
         latitudes = [latitude]
         longitudes = [longitude]
         Earth_radius_in_km = 6371
 
-        # Create initial map for land checking
         m = Basemap(projection='merc', llcrnrlat=-60, urcrnrlat=60,
                     llcrnrlon=-180, urcrnrlon=180, resolution='i')
 
-        for _ in range(20):
+        for _ in range(100):  
             new_lon = longitudes[-1] + (u * dt * 360) / (2 * np.pi * Earth_radius_in_km * np.cos(np.radians(latitudes[-1])))
             new_lat = latitudes[-1] + (v * dt * 360) / (2 * np.pi * Earth_radius_in_km)
             new_lat += (f * dt * u) / (2 * np.pi * Earth_radius_in_km)
@@ -35,18 +34,18 @@ def generate_map(latitude, longitude, wind_speed, direction):
             new_lat = np.clip(new_lat, -90, 90)
 
             x, y = m(new_lon, new_lat)
+
             if m.is_land(x, y):
                 longitudes.append(new_lon)
                 latitudes.append(new_lat)
                 break
+            else:
+                longitudes.append(new_lon)
+                latitudes.append(new_lat)
 
-            longitudes.append(new_lon)
-            latitudes.append(new_lat)
-
-        plt.clf()  # Clear any existing plots
+        plt.clf()
         fig, ax = plt.subplots(figsize=(10, 7))
         
-        # Create visualization map
         m = Basemap(projection='merc', llcrnrlat=min(latitudes) - 5, urcrnrlat=max(latitudes) + 5,
                     llcrnrlon=min(longitudes) - 5, urcrnrlon=max(longitudes) + 5, resolution='i')
 
@@ -75,7 +74,6 @@ def generate_map(latitude, longitude, wind_speed, direction):
         image_filename = 'cyclone_trajectory.png'
         image_path = os.path.join(image_directory, image_filename)
 
-        # Save with explicit close
         plt.savefig(image_path)
         plt.close('all')
 
