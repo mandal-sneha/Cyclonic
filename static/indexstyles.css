@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: url('earth_rotating.gif') no-repeat center center fixed;
+    background: url(background_image.png);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -62,7 +62,7 @@ body {
     height: 60px;
     width: 200px;
     padding: 20px 20px;
-    background-color: #70a6ba;
+    background-color: #0b425e;
     color: rgb(246, 239, 239);
     border: none;
     border-radius: 20px;
